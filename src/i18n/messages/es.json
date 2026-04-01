@@ -1,0 +1,78 @@
+{
+  "common": {
+    "addToCart": "Agregar al Carrito",
+    "buyNow": "Comprar Ahora",
+    "checkout": "Pagar",
+    "backToProducts": "Volver a Productos",
+    "loading": "Cargando...",
+    "error": "Algo salió mal",
+    "currency": "USD",
+    "home": "Inicio",
+    "products": "Productos",
+    "admin": "Admin",
+    "language": "Idioma",
+    "theme": "Tema"
+  },
+  "products": {
+    "title": "Nuestros Productos",
+    "subtitle": "Descubre nuestra colección seleccionada",
+    "noProducts": "No hay productos disponibles aún.",
+    "aiGenerated": "Generado con IA",
+    "price": "Precio",
+    "outOfStock": "Agotado",
+    "inStock": "En Stock",
+    "category": "Categoría",
+    "details": "Detalles del Producto"
+  },
+  "checkout": {
+    "title": "Pago",
+    "orderSummary": "Resumen del Pedido",
+    "quantity": "Cantidad",
+    "total": "Total",
+    "payNow": "Pagar Ahora",
+    "processing": "Procesando...",
+    "redirecting": "Redirigiendo al pago..."
+  },
+  "order": {
+    "confirmed": "¡Pedido Confirmado!",
+    "thankYou": "Gracias por tu compra.",
+    "orderId": "ID del Pedido",
+    "status": "Estado",
+    "paid": "Pagado",
+    "pending": "Pendiente",
+    "viewProducts": "Seguir Comprando",
+    "details": "Detalles del Pedido",
+    "product": "Producto",
+    "amount": "Monto"
+  },
+  "admin": {
+    "title": "Gestión de Productos",
+    "createProduct": "Crear Producto",
+    "editProduct": "Editar Producto",
+    "productName": "Nombre del Producto",
+    "productNameEs": "Nombre del Producto (Español)",
+    "description": "Descripción",
+    "descriptionEs": "Descripción (Español)",
+    "price": "Precio",
+    "category": "Categoría",
+    "imageUrl": "URL de Imagen",
+    "stock": "Stock",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "generateWithAI": "Generar con IA",
+    "generating": "Generando..."
+  },
+  "theme": {
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema"
+  },
+  "chat": {
+    "title": "Asistente de Compras",
+    "open": "Abrir chat",
+    "welcome": "Hola! Puedo ayudarte a encontrar productos, consultar pedidos o responder preguntas. ¿En qué te ayudo?",
+    "placeholder": "Pregunta sobre productos, pedidos...",
+    "error": "Algo salió mal. Intenta de nuevo."
+  }
+}

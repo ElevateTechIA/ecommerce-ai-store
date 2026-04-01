@@ -1,0 +1,78 @@
+{
+  "common": {
+    "addToCart": "Add to Cart",
+    "buyNow": "Buy Now",
+    "checkout": "Checkout",
+    "backToProducts": "Back to Products",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "currency": "USD",
+    "home": "Home",
+    "products": "Products",
+    "admin": "Admin",
+    "language": "Language",
+    "theme": "Theme"
+  },
+  "products": {
+    "title": "Our Products",
+    "subtitle": "Discover our curated collection",
+    "noProducts": "No products available yet.",
+    "aiGenerated": "AI-Generated",
+    "price": "Price",
+    "outOfStock": "Out of Stock",
+    "inStock": "In Stock",
+    "category": "Category",
+    "details": "Product Details"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "orderSummary": "Order Summary",
+    "quantity": "Quantity",
+    "total": "Total",
+    "payNow": "Pay Now",
+    "processing": "Processing...",
+    "redirecting": "Redirecting to payment..."
+  },
+  "order": {
+    "confirmed": "Order Confirmed!",
+    "thankYou": "Thank you for your purchase.",
+    "orderId": "Order ID",
+    "status": "Status",
+    "paid": "Paid",
+    "pending": "Pending",
+    "viewProducts": "Continue Shopping",
+    "details": "Order Details",
+    "product": "Product",
+    "amount": "Amount"
+  },
+  "admin": {
+    "title": "Product Management",
+    "createProduct": "Create Product",
+    "editProduct": "Edit Product",
+    "productName": "Product Name",
+    "productNameEs": "Product Name (Spanish)",
+    "description": "Description",
+    "descriptionEs": "Description (Spanish)",
+    "price": "Price",
+    "category": "Category",
+    "imageUrl": "Image URL",
+    "stock": "Stock",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "generateWithAI": "Generate with AI",
+    "generating": "Generating..."
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "chat": {
+    "title": "Shopping Assistant",
+    "open": "Open chat",
+    "welcome": "Hi! I can help you find products, check orders, or answer questions. What do you need?",
+    "placeholder": "Ask about products, orders...",
+    "error": "Something went wrong. Please try again."
+  }
+}
