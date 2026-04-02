@@ -1,28 +1,20 @@
-import { getApps } from 'firebase-admin/app';
-import { getAuth as getAdminAuthFn } from 'firebase-admin/auth';
-import { getFirestore, Firestore } from 'firebase-admin/firestore';
-import { getStorage } from 'firebase-admin/storage';
+import { getDb, getStorage, getAuth } from '@/lib/db/firebase';
 
-// Import getDb to ensure firebase is initialized via our main firebase.ts
-import { getDb } from '@/lib/db/firebase';
-
-// Use the same db instance initialized in firebase.ts (with preferRest)
-let db: Firestore;
-try {
-  db = getDb();
-} catch {
-  db = {} as Firestore;
-}
+// Re-export db as a lazy proxy so it always uses the preferRest instance
+const db = new Proxy({} as FirebaseFirestore.Firestore, {
+  get(_target, prop) {
+    return (getDb() as any)[prop];
+  },
+});
 
 export { db };
 
 export function getAdminAuth() {
-  return getAdminAuthFn();
+  return getAuth();
 }
 
 export function getStorageBucket() {
-  const projectId = process.env.FIREBASE_PROJECT_ID || 'landing-ai-meetings';
-  return getStorage().bucket(`${projectId}.firebasestorage.app`);
+  return getStorage();
 }
 
 // Colecciones
