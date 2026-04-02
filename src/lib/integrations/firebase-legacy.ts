@@ -1,37 +1,17 @@
-import { initializeApp, getApps, cert } from 'firebase-admin/app';
+import { getApps } from 'firebase-admin/app';
 import { getAuth as getAdminAuthFn } from 'firebase-admin/auth';
-import { getFirestore } from 'firebase-admin/firestore';
+import { getFirestore, Firestore } from 'firebase-admin/firestore';
 import { getStorage } from 'firebase-admin/storage';
 
-// Inicializar Firebase Admin solo una vez
-let db: ReturnType<typeof getFirestore>;
+// Import getDb to ensure firebase is initialized via our main firebase.ts
+import { getDb } from '@/lib/db/firebase';
 
+// Use the same db instance initialized in firebase.ts (with preferRest)
+let db: Firestore;
 try {
-  const apps = getApps();
-
-  if (!apps.length) {
-    // Validar que existan las variables de entorno
-    if (!process.env.FIREBASE_PROJECT_ID || !process.env.FIREBASE_CLIENT_EMAIL || !process.env.FIREBASE_PRIVATE_KEY) {
-      console.warn('Firebase credentials not configured. Please set FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, and FIREBASE_PRIVATE_KEY in .env.local');
-    } else {
-      const app = initializeApp({
-        credential: cert({
-          projectId: process.env.FIREBASE_PROJECT_ID,
-          clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-          privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-        }),
-        storageBucket: `${process.env.FIREBASE_PROJECT_ID}.firebasestorage.app`,
-      });
-      const firestore = getFirestore(app);
-      firestore.settings({ preferRest: true });
-    }
-  }
-
-  db = getFirestore();
-} catch (error) {
-  console.error('Error initializing Firebase:', error);
-  // Crear un mock DB para desarrollo sin credenciales
-  db = {} as ReturnType<typeof getFirestore>;
+  db = getDb();
+} catch {
+  db = {} as Firestore;
 }
 
 export { db };
