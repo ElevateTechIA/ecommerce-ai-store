@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import admin from 'firebase-admin';
+import { getAdminAuth } from '@/lib/db/firebase';
 import { getOrCreateUser } from '@/lib/db/users';
-
-// Ensure firebase admin is initialized
-import '@/lib/db/firebase';
 
 export async function POST(request: NextRequest) {
   const authHeader = request.headers.get('authorization');
@@ -14,7 +11,7 @@ export async function POST(request: NextRequest) {
   const token = authHeader.split('Bearer ')[1];
 
   try {
-    const decoded = await admin.auth().verifyIdToken(token);
+    const decoded = await getAdminAuth().verifyIdToken(token);
     const user = await getOrCreateUser(decoded.uid, {
       email: decoded.email || '',
       displayName: decoded.name || null,

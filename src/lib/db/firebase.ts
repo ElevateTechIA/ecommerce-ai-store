@@ -1,38 +1,43 @@
-import admin from 'firebase-admin';
+import { initializeApp, getApps, cert } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
+import { getStorage as getAdminStorage } from 'firebase-admin/storage';
+import { getAuth as getAdminAuth } from 'firebase-admin/auth';
 
-function parsePrivateKey(key: string | undefined): string {
-  if (!key) return '';
-  return key.includes('\\n') ? key.replace(/\\n/g, '\n') : key;
-}
+let db: ReturnType<typeof getFirestore>;
 
-function getApp(): admin.app.App {
-  if (admin.apps.length > 0) {
-    return admin.apps[0]!;
+try {
+  const apps = getApps();
+
+  if (!apps.length) {
+    if (!process.env.FIREBASE_PROJECT_ID || !process.env.FIREBASE_CLIENT_EMAIL || !process.env.FIREBASE_PRIVATE_KEY) {
+      console.warn('Firebase credentials not configured.');
+    } else {
+      initializeApp({
+        credential: cert({
+          projectId: process.env.FIREBASE_PROJECT_ID,
+          clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+          privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+        }),
+        storageBucket: `${process.env.FIREBASE_PROJECT_ID}.firebasestorage.app`,
+      });
+    }
   }
 
-  return admin.initializeApp({
-    credential: admin.credential.cert({
-      projectId: process.env.FIREBASE_PROJECT_ID,
-      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey: parsePrivateKey(process.env.FIREBASE_PRIVATE_KEY),
-    }),
-  });
+  db = getFirestore();
+} catch (error) {
+  console.error('Error initializing Firebase:', error);
+  db = {} as ReturnType<typeof getFirestore>;
 }
 
-let db: FirebaseFirestore.Firestore | null = null;
-
-export function getDb(): FirebaseFirestore.Firestore {
-  if (db) return db;
-  const app = getApp();
-  db = getFirestore(app);
+export function getDb(): ReturnType<typeof getFirestore> {
   return db;
 }
 
 export function getStorage() {
-  const projectId = process.env.FIREBASE_PROJECT_ID || 'ecommerce-ai-store';
-  return getApp().storage().bucket(`${projectId}.firebasestorage.app`);
+  return getAdminStorage().bucket();
 }
+
+export { getAdminAuth };
 
 export const COLLECTIONS = {
   products: 'products',
