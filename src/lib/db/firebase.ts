@@ -12,7 +12,7 @@ try {
     if (!process.env.FIREBASE_PROJECT_ID || !process.env.FIREBASE_CLIENT_EMAIL || !process.env.FIREBASE_PRIVATE_KEY) {
       console.warn('Firebase credentials not configured.');
     } else {
-      initializeApp({
+      const app = initializeApp({
         credential: cert({
           projectId: process.env.FIREBASE_PROJECT_ID,
           clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
@@ -20,6 +20,8 @@ try {
         }),
         storageBucket: `${process.env.FIREBASE_PROJECT_ID}.firebasestorage.app`,
       });
+      const firestore = getFirestore(app);
+      firestore.settings({ preferRest: true });
     }
   }
 
