@@ -20,13 +20,16 @@ function ensureInitialized(): Firestore {
       throw new Error('Firebase credentials not configured');
     }
 
+    const projectId = process.env.FIREBASE_PROJECT_ID.trim();
+    const clientEmail = process.env.FIREBASE_CLIENT_EMAIL.trim();
+
     app = initializeApp({
       credential: cert({
-        projectId: process.env.FIREBASE_PROJECT_ID,
-        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+        projectId,
+        clientEmail,
         privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
       }),
-      storageBucket: `${process.env.FIREBASE_PROJECT_ID}.firebasestorage.app`,
+      storageBucket: `${projectId}.firebasestorage.app`,
     });
   }
 
